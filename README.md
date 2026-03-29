@@ -17,7 +17,7 @@ My goal is to demonstrate how data-driven insights can improve financial decisio
 ------
 
 # Live Demo
-    [View the Dashboard] (https://bankloanriskdasboarddeploy-rcnpaeeqwqhbrrxsj86zot.streamlit.app/#bank-loan-risk-and-customer-segmentation-dashboard)
+    ![View the Dashboard] (https://bankloanriskdasboarddeploy-rcnpaeeqwqhbrrxsj86zot.streamlit.app/#bank-loan-risk-and-customer-segmentation-dashboard)
 
 ------
 
