@@ -38,6 +38,9 @@ st.markdown(
         color: #475569;
         font-size: 0.93rem;
     }
+    .stApp {
+    background: linear-gradient(180deg, #020617 0%, #0f172a 40%, #1e293b 100%);
+    }
     </style>
     """,
     unsafe_allow_html=True,
