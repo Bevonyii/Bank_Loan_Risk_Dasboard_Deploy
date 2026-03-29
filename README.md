@@ -56,10 +56,8 @@ My goal is to demonstrate how data-driven insights can improve financial decisio
 
 ## Preview
 
-*(Add a screenshot of your dashboard here)*
-
 ```markdown
-![Dashboard Screenshot](your_screenshot.png)
+![Dashboard Screenshot](Dashboard_Top_SS.png)
 
 ## How to Run Locally
 
