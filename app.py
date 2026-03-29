@@ -205,10 +205,13 @@ This dashboard combines supervised learning for personal loan prediction with un
 
 Key metrics and cluster summaries provide insights across the full dataset, while the interactive section allows users to simulate individual customers and observe how their financial profile affects loan acceptance probability and segment classification.
 
-This approach demonstrates how predictive modeling and segmentation can be used together to support targeted marketing and data-driven financial decisions.
 """)
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <hr style="border: none; height: 2px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 30px;">
+    """, 
+    unsafe_allow_html=True)
 
 left, right = st.columns([1, 1], gap="large")
 
