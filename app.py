@@ -304,7 +304,11 @@ with left:
     fig.patch.set_facecolor('#0f172a')
     ax.set_facecolor('#0f172a')
     loan_rate = model_df.groupby("Education")["Personal Loan"].mean().sort_index()
-    ax.bar(["Undergrad", "Graduate", "Advanced"], loan_rate.values)
+    ax.bar(
+        ["Undergrad", "Graduate", "Advanced"],
+        loan_rate.values,
+        color="#4f8cff"
+    )
     ax.set_title("Loan Acceptance Rate by Education")
     ax.set_ylabel("Acceptance Rate")
     st.pyplot(fig)
@@ -329,9 +333,18 @@ with left:
 with right:
     st.subheader("Cluster View")
     fig2, ax2 = plt.subplots(figsize=(7, 4))
-    for c in sorted(model_df["Cluster"].unique()):
+
+    colors = ['#4f8cff', '#7aa6ff', '#a5c4ff']
+    for i, c in enumerate(sorted(model_df["Cluster"].unique())):
         temp = model_df[model_df["Cluster"] == c]
-        ax2.scatter(temp["PCA1"], temp["PCA2"], alpha=0.6, label=assets["cluster_summary"].loc[c, "Cluster Label"])
+        ax2.scatter(
+            temp["PCA1"],
+            temp["PCA2"],
+            color=colors[i],
+            alpha=0.7,
+            label=assets["cluster_summary"].loc[c, "Cluster Label"]
+        )
+        
     ax2.set_title("Customer Segments (PCA View)")
     ax2.set_xlabel("PCA 1")
     ax2.set_ylabel("PCA 2")
