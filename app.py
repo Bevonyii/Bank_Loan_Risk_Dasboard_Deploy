@@ -309,6 +309,21 @@ with left:
     ax.set_ylabel("Acceptance Rate")
     st.pyplot(fig)
     st.markdown("</div>", unsafe_allow_html=True)
+
+
+    st.markdown(
+    """
+    <hr style="border: none; height: 2px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 30px;">
+    """, 
+    unsafe_allow_html=True)
+
+    st.subheader("Strategic Recommendations")
+
+    st.markdown("""
+    - Prioritize high-income customers with existing financial products for loan campaigns  
+    - Use segmentation to tailor marketing strategies by customer group  
+    - Leverage model predictions to support risk-aware loan approval decisions  
+    """)
     
 
 with right:
@@ -351,12 +366,5 @@ with right:
     )
     
 
-st.subheader("Strategic Recommendations")
-
-st.markdown("""
-- Prioritize high-income customers with existing financial products for loan campaigns  
-- Use segmentation to tailor marketing strategies by customer group  
-- Leverage model predictions to support risk-aware loan approval decisions  
-""")
 
 st.markdown("<p class='small-note'>Built with Streamlit, scikit-learn, pandas, and matplotlib.</p>", unsafe_allow_html=True)
