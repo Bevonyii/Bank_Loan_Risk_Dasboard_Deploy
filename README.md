@@ -61,7 +61,6 @@ My goal is to demonstrate how data-driven insights can improve financial decisio
 
 # Preview
 
-markdown
 ![Dashboard Screenshot](Dashboard_Top_SS.png)
 
 ------
