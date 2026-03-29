@@ -243,28 +243,37 @@ with left:
 
         outcome = "Likely" if pred == 1 else "Unlikely"
         
+        color = "#22c55e" if outcome == "Likely" else "#ef4444"
+
         r1, r2, r3 = st.columns([1, 1, 1], gap="large")
+
         with r1:
             st.markdown(f"""
             <div style="text-align:center;">
-                <div style="font-size:16px; color:#cbd5e1; margin-bottom:8px;">Loan Outcome</div>
-                <div style="font-size:30px; font-weight:700; color:white;">{outcome}</div>
+                <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">Loan Outcome</div>
+                <div style="font-size:26px; font-weight:600; color:{color}; white-space: nowrap;">
+                    {outcome}
+                </div>
             </div>
             """, unsafe_allow_html=True)
 
         with r2:
             st.markdown(f"""
             <div style="text-align:center;">
-                <div style="font-size:16px; color:#cbd5e1; margin-bottom:8px;">Loan Probability</div>
-                <div style="font-size:30px; font-weight:700; color:white;">{prob*100:.1f}%</div>
+                <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">Loan Probability</div>
+                <div style="font-size:26px; font-weight:600; color:white; white-space: nowrap;">
+                    {prob*100:.1f}%
+                </div>
             </div>
             """, unsafe_allow_html=True)
 
         with r3:
             st.markdown(f"""
             <div style="text-align:center;">
-                <div style="font-size:16px; color:#cbd5e1; margin-bottom:8px;">Customer Segment</div>
-                <div style="font-size:22px; font-weight:700; color:white;">{cluster_label}</div>
+                <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">Segment</div>
+                <div style="font-size:26px; font-weight:600; color:white; white-space: nowrap;">
+                    {cluster_label}
+                </div>
             </div>
             """, unsafe_allow_html=True)
 
