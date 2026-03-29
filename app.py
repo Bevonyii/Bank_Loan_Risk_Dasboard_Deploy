@@ -333,7 +333,7 @@ with left:
 with right:
     st.subheader("Cluster View")
     fig2, ax2 = plt.subplots(figsize=(7, 4))
-    colors = ['#4f8cff', '#ff7f0e', '#2ca02c']
+    colors = ['#4f8cff', '#c7b6ff', '#f4e3a1']
 
     for i, c in enumerate(sorted(model_df["Cluster"].unique())):
         temp = model_df[model_df["Cluster"] == c]
