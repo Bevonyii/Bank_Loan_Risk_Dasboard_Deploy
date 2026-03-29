@@ -98,6 +98,6 @@ This project was built as part of a data analytics portfolio to demonstrate:
 ------
 
 # Author
-Beverly Ajuzie
-Computer Science (Data Analytics) Student @ UTSA
-Aspiring Data Analyst
+Beverly Ajuzie  
+Computer Science (Data Analytics) Student @ UTSA  
+Aspiring Data Analyst  
