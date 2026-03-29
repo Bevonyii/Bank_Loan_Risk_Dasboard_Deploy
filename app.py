@@ -162,6 +162,8 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+st.markdown("<div style='margin-top: 0.75rem;'></div>", unsafe_allow_html=True)
+
 
 with st.sidebar:
     st.header("Customer Inputs")
@@ -198,17 +200,6 @@ input_df = pd.DataFrame([{
 outer_left, center, outer_right = st.columns([0.4, 5.2, 0.4])
 
 with center:
-    st.markdown(
-        """
-        <div class='hero'>
-            <h1 style='margin:0;'>Bank Loan Risk & Customer Segmentation Dashboard</h1>
-            <p style='margin:0.4rem 0 0 0;'>An interactive Streamlit app for loan prediction, customer clustering, and business recommendations.</p>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    st.markdown("<div style='margin-top: 0.75rem;'></div>", unsafe_allow_html=True)
 
     k1, k2, k3, k4 = st.columns(4, gap="medium")
     k1.metric("Customers", f"{len(model_df):,}")
