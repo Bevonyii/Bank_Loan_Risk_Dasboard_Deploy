@@ -190,10 +190,10 @@ input_df = pd.DataFrame([{
     "CreditCard": credit,
 }])
 
-outer_left, center, outer_right = st.columns([0.4, 6, 0.1])
+outer_left, center, outer_right = st.columns([0.4, 1, 0.1])
 
 with center:
-    col1, col2, col3, col4 = st.columns(4, gap="medium")
+    col1, col2, col3, col4 = st.columns(4, gap="large")
 
     col1.metric("Customers", f"{len(model_df):,}")
     col2.metric("Loan Acceptance Rate", f"{model_df['Personal Loan'].mean()*100:.1f}%")
