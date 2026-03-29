@@ -210,11 +210,7 @@ Key metrics and cluster summaries provide insights across the full dataset, whil
 
 """)
 
-st.markdown(
-    """
-    <hr style="border: none; height: 2px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 30px;">
-    """, 
-    unsafe_allow_html=True)
+st.markdown("<div style='margin-top: 2rem;'></div>", unsafe_allow_html=True)
 
 left, right = st.columns([1, 1], gap="large")
 
