@@ -61,7 +61,7 @@ My goal is to demonstrate how data-driven insights can improve financial decisio
 
 # Preview
 
-```markdown
+markdown
 ![Dashboard Screenshot](Dashboard_Top_SS.png)
 
 ------
@@ -70,6 +70,7 @@ My goal is to demonstrate how data-driven insights can improve financial decisio
 
 1. Clone the repository:
 
+    ```bash
     git clone https://github.com/your-username/your-repo-name.git
     cd your-repo-name
 
