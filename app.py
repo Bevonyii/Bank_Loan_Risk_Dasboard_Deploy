@@ -234,23 +234,39 @@ with left:
         prob = assets["clf"].predict_proba(input_df[assets["feature_cols"]])[0][1]
         cluster_num, cluster_label = predict_cluster(input_df, assets)
 
+        label_map = {
+            "High-Value Professionals": "High-Value",
+            "Family-Focused Customers": "Family-Focused",
+            "Everyday Banking Customers": "Everyday Banking"
+        }
+        cluster_label = label_map.get(cluster_label, cluster_label)
+
         outcome = "Likely" if pred == 1 else "Unlikely"
         
-        r1, r2, r3 = st.columns(3)
+        r1, r2, r3 = st.columns([1, 1, 1], gap="large")
         with r1:
-            st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-            st.metric("Predicted Loan Outcome", outcome)
-            st.markdown("</div>", unsafe_allow_html=True)
+            st.markdown(f"""
+            <div style="text-align:center;">
+                <div style="font-size:16px; color:#cbd5e1; margin-bottom:8px;">Loan Outcome</div>
+                <div style="font-size:30px; font-weight:700; color:white;">{outcome}</div>
+            </div>
+            """, unsafe_allow_html=True)
 
         with r2:
-            st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-            st.metric("Loan Probability", f"{prob*100:.1f}%")
-            st.markdown("</div>", unsafe_allow_html=True)
+            st.markdown(f"""
+            <div style="text-align:center;">
+                <div style="font-size:16px; color:#cbd5e1; margin-bottom:8px;">Loan Probability</div>
+                <div style="font-size:30px; font-weight:700; color:white;">{prob*100:.1f}%</div>
+            </div>
+            """, unsafe_allow_html=True)
 
         with r3:
-            st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-            st.metric("Customer Segment", cluster_label)
-            st.markdown("</div>", unsafe_allow_html=True)
+            st.markdown(f"""
+            <div style="text-align:center;">
+                <div style="font-size:16px; color:#cbd5e1; margin-bottom:8px;">Customer Segment</div>
+                <div style="font-size:22px; font-weight:700; color:white;">{cluster_label}</div>
+            </div>
+            """, unsafe_allow_html=True)
 
         st.progress(min(max(float(prob), 0.0), 1.0))
         st.caption(f"Cluster {cluster_num}: {cluster_label}")
