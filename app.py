@@ -190,7 +190,7 @@ input_df = pd.DataFrame([{
     "CreditCard": credit,
 }])
 
-outer_left, center, outer_right = st.columns([1, 7, 0.6])
+outer_left, center, outer_right = st.columns([0.4, 7, 0.2])
 
 with center:
     col1, col2, col3, col4 = st.columns(4, gap="medium")
