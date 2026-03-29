@@ -380,3 +380,8 @@ with right:
 
 
 st.markdown("<p class='small-note'>Built with Streamlit, scikit-learn, pandas, and matplotlib.</p>", unsafe_allow_html=True)
+
+st.markdown(
+    "<p class='small-note'>Created by Beverly Ajuzie</p>",
+    unsafe_allow_html=True
+)
