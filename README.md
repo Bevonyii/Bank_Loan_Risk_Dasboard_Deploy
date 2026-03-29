@@ -64,6 +64,8 @@ My goal is to demonstrate how data-driven insights can improve financial decisio
 ```markdown
 ![Dashboard Screenshot](Dashboard_Top_SS.png)
 
+------
+
 # How to Run Locally
 
 1. Clone the repository:
@@ -77,16 +79,22 @@ My goal is to demonstrate how data-driven insights can improve financial decisio
 3. Run the app:
     streamlit run app.py
 
+------
+
 # Key Insights
 - Higher-income customers show a much higher chance of a loan acceptance
 - Customer segmentation shows distinct financial behavior patterns
 - Combining prediction and clustering allows for more targeted decision-making with the support of added risk knowledge
+
+------
 
 # Purpose
 This project was built as part of a data analytics portfolio to demonstrate:
 - End-to-end data workflow (data → model → insights → UI)
 - Ability to translate data into business value
 - Experience building interactive analytical tools
+
+------
 
 # Author
 Beverly Ajuzie
