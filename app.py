@@ -38,14 +38,6 @@ st.markdown(
         color: #475569;
         font-size: 0.93rem;
     }
-    [data-testid="stMetricValue"] {
-    font-size: 2.3rem;
-    font-weight: 700;
-    }
-    [data-testid="stMetricLabel"] {
-        font-size: 1rem;
-        color: #cbd5e1;
-    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -162,8 +154,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-st.markdown("<div style='margin-top: 0.75rem;'></div>", unsafe_allow_html=True)
-
 
 with st.sidebar:
     st.header("Customer Inputs")
@@ -197,35 +187,96 @@ input_df = pd.DataFrame([{
     "CreditCard": credit,
 }])
 
-outer_left, center, outer_right = st.columns([0.4, 5.2, 0.4])
+col1, col2, col3, col4 = st.columns(4, gap="large")
+col1.metric("Customers", f"{len(model_df):,}")
+col2.metric("Loan Acceptance Rate", f"{model_df['Personal Loan'].mean()*100:.1f}%")
+col3.metric("Avg Income", f"${model_df['Income'].mean():.1f}K")
+col4.metric("Model Accuracy", f"{assets['acc']*100:.1f}%")
 
-with center:
+st.markdown(
+    """
+    <hr style="border: none; height: 2px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 30px;">
+    """, 
+    unsafe_allow_html=True)
 
-    k1, k2, k3, k4 = st.columns(4, gap="medium")
-    k1.metric("Customers", f"{len(model_df):,}")
-    k2.metric("Loan Acceptance Rate", f"{model_df['Personal Loan'].mean()*100:.1f}%")
-    k3.metric("Avg Income", f"${model_df['Income'].mean():.1f}K")
-    k4.metric("Model Accuracy", f"{assets['acc']*100:.1f}%")
+st.subheader("Project Overview")
+st.write("""
+This dashboard combines supervised learning for personal loan prediction with unsupervised learning for customer segmentation. 
 
-    st.markdown(
-        """
-        <hr style="border: none; height: 2px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 30px;">
-        """, 
-        unsafe_allow_html=True)
+Key metrics and cluster summaries provide insights across the full dataset, while the interactive section allows users to simulate individual customers and observe how their financial profile affects loan acceptance probability and segment classification.
 
-    st.subheader("Project Overview")
-    st.write("""
-    This dashboard combines supervised learning for personal loan prediction with unsupervised learning for customer segmentation. 
-
-    Key metrics and cluster summaries provide insights across the full dataset, while the interactive section allows users to simulate individual customers and observe how their financial profile affects loan acceptance probability and segment classification.
-
-    This approach demonstrates how predictive modeling and segmentation can be used together to support targeted marketing and data-driven financial decisions.
-    """)
+This approach demonstrates how predictive modeling and segmentation can be used together to support targeted marketing and data-driven financial decisions.
+""")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
 left, right = st.columns([1, 1], gap="large")
+
 with left:
+
+    st.subheader("Interactive Prediction")
+
+    if run_pred:
+        pred = assets["clf"].predict(input_df[assets["feature_cols"]])[0]
+        prob = assets["clf"].predict_proba(input_df[assets["feature_cols"]])[0][1]
+        cluster_num, cluster_label = predict_cluster(input_df, assets)
+
+        label_map = {
+            "High-Value Professionals": "High-Value",
+            "Family-Focused Customers": "Family-Focused",
+            "Everyday Banking Customers": "Everyday Banking"
+        }
+        cluster_label = label_map.get(cluster_label, cluster_label)
+
+        outcome = "Likely" if pred == 1 else "Unlikely"
+        
+        color = "#22c55e" if outcome == "Likely" else "#ef4444"
+
+        r1, r2, r3 = st.columns([1, 1, 1], gap="large")
+
+        with r1:
+            st.markdown(f"""
+            <div style="text-align:center;">
+                <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">Loan Outcome</div>
+                <div style="font-size:26px; font-weight:600; color:{color}; white-space: nowrap;">
+                    {outcome}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with r2:
+            st.markdown(f"""
+            <div style="text-align:center;">
+                <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">Loan Probability</div>
+                <div style="font-size:26px; font-weight:600; color:white; white-space: nowrap;">
+                    {prob*100:.1f}%
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with r3:
+            st.markdown(f"""
+            <div style="text-align:center;">
+                <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">Segment</div>
+                <div style="
+                    font-size:22px;
+                    font-weight:600;
+                    color:white;
+                    line-height:1.2;
+                    word-break: break-word;
+                    overflow-wrap: break-word;
+                ">
+                    {cluster_label}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.progress(min(max(float(prob), 0.0), 1.0))
+        st.caption(f"Cluster {cluster_num}: {cluster_label}")
+
+        st.info(recommendation(prob, cluster_label))
+    else:
+        st.write("Use the sidebar to enter customer details, then click **Predict Customer Outcome**.")
 
     st.markdown(
     """
@@ -240,7 +291,7 @@ with left:
     ax.set_ylabel("Acceptance Rate")
     st.pyplot(fig)
     st.markdown("</div>", unsafe_allow_html=True)
-
+    
 
 with right:
     st.subheader("Cluster View")
