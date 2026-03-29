@@ -187,11 +187,14 @@ input_df = pd.DataFrame([{
     "CreditCard": credit,
 }])
 
-col1, col2, col3, col4 = st.columns(4, gap="large")
-col1.metric("Customers", f"{len(model_df):,}")
-col2.metric("Loan Acceptance Rate", f"{model_df['Personal Loan'].mean()*100:.1f}%")
-col3.metric("Avg Income", f"${model_df['Income'].mean():.1f}K")
-col4.metric("Model Accuracy", f"{assets['acc']*100:.1f}%")
+outer_left, center, outer_right = st.columns([0.6, 4.8, 0.6])
+
+with center:
+    col1, col2, col3, col4 = st.columns(4, gap="medium")
+    col1.metric("Customers", f"{len(model_df):,}")
+    col2.metric("Loan Acceptance Rate", f"{model_df['Personal Loan'].mean()*100:.1f}%")
+    col3.metric("Avg Income", f"${model_df['Income'].mean():.1f}K")
+    col4.metric("Model Accuracy", f"{assets['acc']*100:.1f}%")
 
 st.markdown(
     """
