@@ -271,7 +271,14 @@ with left:
             st.markdown(f"""
             <div style="text-align:center;">
                 <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">Segment</div>
-                <div style="font-size:26px; font-weight:600; color:white; white-space: nowrap;">
+                <div style="
+                    font-size:22px;
+                    font-weight:600;
+                    color:white;
+                    line-height:1.2;
+                    word-break: break-word;
+                    overflow-wrap: break-word;
+                ">
                     {cluster_label}
                 </div>
             </div>
