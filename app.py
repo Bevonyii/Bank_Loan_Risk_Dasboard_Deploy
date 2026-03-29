@@ -190,7 +190,7 @@ input_df = pd.DataFrame([{
     "CreditCard": credit,
 }])
 
-left_side, right_side = st.columns([1, 1])
+left_side, spacer, right_side = st.columns([1, 0.2, 1])
 
 # LEFT HALF
 with left_side:
