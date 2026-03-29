@@ -212,21 +212,6 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 left, right = st.columns([1, 1], gap="large")
 with left:
-
-    fig, ax = plt.subplots(figsize=(7, 4))
-    loan_rate = model_df.groupby("Education")["Personal Loan"].mean().sort_index()
-    ax.bar(["Undergrad", "Graduate", "Advanced"], loan_rate.values)
-    ax.set_title("Loan Acceptance Rate by Education")
-    ax.set_ylabel("Acceptance Rate")
-    st.pyplot(fig)
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    st.markdown(
-    """
-    <hr style="border: none; height: 2px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 30px;">
-    """, 
-    unsafe_allow_html=True)
-    
     st.subheader("Interactive Prediction")
 
     if run_pred:
@@ -291,18 +276,22 @@ with left:
     else:
         st.write("Use the sidebar to enter customer details, then click **Predict Customer Outcome**.")
 
-with right:
-    st.subheader("Cluster Summary")
-    show_summary = assets["cluster_summary"].copy()
-    st.dataframe(show_summary, use_container_width=True)
-    st.markdown("</div>", unsafe_allow_html=True)
-
     st.markdown(
     """
     <hr style="border: none; height: 2px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 30px;">
     """, 
     unsafe_allow_html=True)
     
+    fig, ax = plt.subplots(figsize=(7, 4))
+    loan_rate = model_df.groupby("Education")["Personal Loan"].mean().sort_index()
+    ax.bar(["Undergrad", "Graduate", "Advanced"], loan_rate.values)
+    ax.set_title("Loan Acceptance Rate by Education")
+    ax.set_ylabel("Acceptance Rate")
+    st.pyplot(fig)
+    st.markdown("</div>", unsafe_allow_html=True)
+
+
+with right:
     st.subheader("Cluster View")
     fig2, ax2 = plt.subplots(figsize=(7, 4))
     for c in sorted(model_df["Cluster"].unique()):
@@ -313,6 +302,17 @@ with right:
     ax2.set_ylabel("PCA 2")
     ax2.legend(fontsize=8)
     st.pyplot(fig2)
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown(
+    """
+    <hr style="border: none; height: 2px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 30px;">
+    """, 
+    unsafe_allow_html=True)
+    
+    st.subheader("Cluster Summary")
+    show_summary = assets["cluster_summary"].copy()
+    st.dataframe(show_summary, use_container_width=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("<p class='small-note'>Built with Streamlit, scikit-learn, pandas, and matplotlib.</p>", unsafe_allow_html=True)
