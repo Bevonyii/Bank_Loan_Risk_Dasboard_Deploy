@@ -41,6 +41,32 @@ st.markdown(
     .stApp {
     background: linear-gradient(180deg, #020617 0%, #0f172a 40%, #1e293b 100%);
     }
+    .kpi-strip {{
+    max-width: 1100px;
+    margin: 0 auto 1.25rem auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    }}
+
+    .kpi-item {{
+        text-align: center;
+        padding: 0.25rem 0;
+    }}
+
+    .kpi-label {{
+        font-size: 0.95rem;
+        color: #cbd5e1;
+        margin-bottom: 0.35rem;
+    }}
+
+    .kpi-value {{
+        font-size: 2.15rem;
+        font-weight: 700;
+        color: white;
+        line-height: 1.1;
+        margin: 0;
+        }}
     </style>
     """,
     unsafe_allow_html=True,
@@ -190,12 +216,26 @@ input_df = pd.DataFrame([{
     "CreditCard": credit,
 }])
 
-col1, col2, col3, col4 = st.columns(4, gap="large")
-
-col1.metric("Customers", f"{len(model_df):,}")
-col2.metric("Loan Acceptance Rate", f"{model_df['Personal Loan'].mean()*100:.1f}%")
-col3.metric("Avg Income", f"${model_df['Income'].mean():.1f}K")
-col4.metric("Model Accuracy", f"{assets['acc']*100:.1f}%")
+st.markdown(f"""
+<div class="kpi-strip">
+    <div class="kpi-item">
+        <div class="kpi-label">Customers</div>
+        <div class="kpi-value">{len(model_df):,}</div>
+    </div>
+    <div class="kpi-item">
+        <div class="kpi-label">Loan Acceptance Rate</div>
+        <div class="kpi-value">{model_df['Personal Loan'].mean()*100:.1f}%</div>
+    </div>
+    <div class="kpi-item">
+        <div class="kpi-label">Avg Income</div>
+        <div class="kpi-value">${model_df['Income'].mean():.1f}K</div>
+    </div>
+    <div class="kpi-item">
+        <div class="kpi-label">Model Accuracy</div>
+        <div class="kpi-value">{assets['acc']*100:.1f}%</div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown(
     """
