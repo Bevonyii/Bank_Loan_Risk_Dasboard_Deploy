@@ -38,6 +38,14 @@ st.markdown(
         color: #475569;
         font-size: 0.93rem;
     }
+    [data-testid="stMetricValue"] {
+    font-size: 2.3rem;
+    font-weight: 700;
+    }
+    [data-testid="stMetricLabel"] {
+        font-size: 1rem;
+        color: #cbd5e1;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -190,26 +198,38 @@ input_df = pd.DataFrame([{
 outer_left, center, outer_right = st.columns([0.4, 5.2, 0.4])
 
 with center:
+    st.markdown(
+        """
+        <div class='hero'>
+            <h1 style='margin:0;'>Bank Loan Risk & Customer Segmentation Dashboard</h1>
+            <p style='margin:0.4rem 0 0 0;'>An interactive Streamlit app for loan prediction, customer clustering, and business recommendations.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("<div style='margin-top: 0.75rem;'></div>", unsafe_allow_html=True)
+
     k1, k2, k3, k4 = st.columns(4, gap="medium")
     k1.metric("Customers", f"{len(model_df):,}")
     k2.metric("Loan Acceptance Rate", f"{model_df['Personal Loan'].mean()*100:.1f}%")
     k3.metric("Avg Income", f"${model_df['Income'].mean():.1f}K")
     k4.metric("Model Accuracy", f"{assets['acc']*100:.1f}%")
 
-st.markdown(
-    """
-    <hr style="border: none; height: 2px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 30px;">
-    """, 
-    unsafe_allow_html=True)
+    st.markdown(
+        """
+        <hr style="border: none; height: 2px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 30px;">
+        """, 
+        unsafe_allow_html=True)
 
-st.subheader("Project Overview")
-st.write("""
-This dashboard combines supervised learning for personal loan prediction with unsupervised learning for customer segmentation. 
+    st.subheader("Project Overview")
+    st.write("""
+    This dashboard combines supervised learning for personal loan prediction with unsupervised learning for customer segmentation. 
 
-Key metrics and cluster summaries provide insights across the full dataset, while the interactive section allows users to simulate individual customers and observe how their financial profile affects loan acceptance probability and segment classification.
+    Key metrics and cluster summaries provide insights across the full dataset, while the interactive section allows users to simulate individual customers and observe how their financial profile affects loan acceptance probability and segment classification.
 
-This approach demonstrates how predictive modeling and segmentation can be used together to support targeted marketing and data-driven financial decisions.
-""")
+    This approach demonstrates how predictive modeling and segmentation can be used together to support targeted marketing and data-driven financial decisions.
+    """)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
