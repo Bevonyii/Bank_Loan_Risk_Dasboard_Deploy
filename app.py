@@ -206,7 +206,7 @@ st.markdown(
     """, 
     unsafe_allow_html=True)
 
-st.subheader("Project Overview")
+st.subheader("Business Objective")
 st.write("""
 This dashboard combines supervised learning for personal loan prediction with unsupervised learning for customer segmentation. 
 
@@ -290,7 +290,12 @@ with left:
     """, 
     unsafe_allow_html=True)
     
-    fig, ax = plt.subplots(figsize=(7, 4))
+    plt.style.use('dark_background')
+
+    fig, ax = plt.subplots()
+
+    fig.patch.set_facecolor('#0f172a')
+    ax.set_facecolor('#0f172a')
     loan_rate = model_df.groupby("Education")["Personal Loan"].mean().sort_index()
     ax.bar(["Undergrad", "Graduate", "Advanced"], loan_rate.values)
     ax.set_title("Loan Acceptance Rate by Education")
