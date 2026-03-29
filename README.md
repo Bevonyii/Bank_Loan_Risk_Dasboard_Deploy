@@ -16,6 +16,11 @@ My goal is to demonstrate how data-driven insights can improve financial decisio
 
 ------
 
+# Live Demo
+    [View the Dashboard] (https://bankloanriskdasboarddeploy-rcnpaeeqwqhbrrxsj86zot.streamlit.app/#bank-loan-risk-and-customer-segmentation-dashboard)
+
+------
+
 # Features
 
 - **KPI Dashboard**
@@ -44,7 +49,7 @@ My goal is to demonstrate how data-driven insights can improve financial decisio
 
 ------
 
-## Tech Stack
+# Tech Stack
 
 - Python  
 - Streamlit  
@@ -54,12 +59,12 @@ My goal is to demonstrate how data-driven insights can improve financial decisio
 
 ------
 
-## Preview
+# Preview
 
 ```markdown
 ![Dashboard Screenshot](Dashboard_Top_SS.png)
 
-## How to Run Locally
+# How to Run Locally
 
 1. Clone the repository:
 
@@ -72,21 +77,18 @@ My goal is to demonstrate how data-driven insights can improve financial decisio
 3. Run the app:
     streamlit run app.py
 
-## Live Demo
-    Link: https://bankloanriskdasboarddeploy-rcnpaeeqwqhbrrxsj86zot.streamlit.app/#bank-loan-risk-and-customer-segmentation-dashboard
-
-## Key Insights
+# Key Insights
 - Higher-income customers show a much higher chance of a loan acceptance
 - Customer segmentation shows distinct financial behavior patterns
 - Combining prediction and clustering allows for more targeted decision-making with the support of added risk knowledge
 
-## Purpose
+# Purpose
 This project was built as part of a data analytics portfolio to demonstrate:
 - End-to-end data workflow (data → model → insights → UI)
 - Ability to translate data into business value
 - Experience building interactive analytical tools
 
-## Author
+# Author
 Beverly Ajuzie
 Computer Science (Data Analytics) Student @ UTSA
 Aspiring Data Analyst
