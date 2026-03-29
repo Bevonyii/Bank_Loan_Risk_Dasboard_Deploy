@@ -187,14 +187,74 @@ input_df = pd.DataFrame([{
     "CreditCard": credit,
 }])
 
-outer_left, center, outer_right = st.columns([0.6, 4.8, 0.6])
+st.markdown("""
+<style>
+.kpi-wrapper {
+    max-width: 1100px;
+    margin: 0 auto 1.25rem auto;
+}
 
-with center:
-    col1, col2, col3, col4 = st.columns(4, gap="medium")
-    col1.metric("Customers", f"{len(model_df):,}")
-    col2.metric("Loan Acceptance Rate", f"{model_df['Personal Loan'].mean()*100:.1f}%")
-    col3.metric("Avg Income", f"${model_df['Income'].mean():.1f}K")
-    col4.metric("Model Accuracy", f"{assets['acc']*100:.1f}%")
+.kpi-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 18px 20px;
+    min-height: 120px;
+}
+
+.kpi-label {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+}
+
+.kpi-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.1;
+    margin: 0;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="kpi-wrapper">', unsafe_allow_html=True)
+
+k1, k2, k3, k4 = st.columns(4, gap="medium")
+
+with k1:
+    st.markdown(f"""
+    <div class="kpi-card">
+        <div class="kpi-label">Customers</div>
+        <p class="kpi-value">{len(model_df):,}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with k2:
+    st.markdown(f"""
+    <div class="kpi-card">
+        <div class="kpi-label">Loan Acceptance Rate</div>
+        <p class="kpi-value">{model_df['Personal Loan'].mean()*100:.1f}%</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with k3:
+    st.markdown(f"""
+    <div class="kpi-card">
+        <div class="kpi-label">Avg Income</div>
+        <p class="kpi-value">${model_df['Income'].mean():.1f}K</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with k4:
+    st.markdown(f"""
+    <div class="kpi-card">
+        <div class="kpi-label">Model Accuracy</div>
+        <p class="kpi-value">{assets['acc']*100:.1f}%</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown(
     """
