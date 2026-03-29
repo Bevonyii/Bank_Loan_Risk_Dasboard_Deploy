@@ -190,17 +190,21 @@ input_df = pd.DataFrame([{
     "CreditCard": credit,
 }])
 
-row1_col1, row1_col2 = st.columns(2, gap="large")
+left_side, right_side = st.columns(2, gap="large")
 
-row1_col1.metric("Customers", f"{len(model_df):,}")
-row1_col2.metric("Loan Acceptance Rate", f"{model_df['Personal Loan'].mean()*100:.1f}%")
+# LEFT HALF
+with left_side:
+    l1, l2 = st.columns(2, gap="medium")
+    
+    l1.metric("Customers", f"{len(model_df):,}")
+    l2.metric("Loan Acceptance Rate", f"{model_df['Personal Loan'].mean()*100:.1f}%")
 
-st.markdown("<div style='margin-top: 0.75rem;'></div>", unsafe_allow_html=True)
-
-row2_col1, row2_col2 = st.columns(2, gap="large")
-
-row2_col1.metric("Avg Income", f"${model_df['Income'].mean():.1f}K")
-row2_col2.metric("Model Accuracy", f"{assets['acc']*100:.1f}%")
+# RIGHT HALF
+with right_side:
+    r1, r2 = st.columns(2, gap="medium")
+    
+    r1.metric("Avg Income", f"${model_df['Income'].mean():.1f}K")
+    r2.metric("Model Accuracy", f"{assets['acc']*100:.1f}%")
 
 st.markdown(
     """
