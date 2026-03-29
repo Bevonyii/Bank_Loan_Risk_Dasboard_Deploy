@@ -40,7 +40,7 @@ st.markdown(
         font-size: 0.93rem;
     }
     .stApp {
-    background: linear-gradient(180deg, #020617 0%, #0f172a 40%, #1e293b 100%);
+    background: linear-gradient(180deg, #06101f 0%, #132238 40%, #22344d 100%);
     }
     </style>
     """,
