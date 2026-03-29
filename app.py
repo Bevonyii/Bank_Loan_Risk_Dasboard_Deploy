@@ -10,6 +10,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 
+plt.style.use('dark_background')
 st.set_page_config(page_title="Bank Loan Risk & Segmentation Dashboard", layout="wide")
 
 st.markdown(
@@ -277,6 +278,13 @@ with left:
             </div>
             """, unsafe_allow_html=True)
 
+            st.markdown(
+                "<div style='margin-top: 0.5rem; color: #94a3b8;'>"
+                "Use this tool to evaluate how changes in customer attributes impact loan approval probability in real time."
+                "</div>",
+                unsafe_allow_html=True
+            )
+
         st.progress(min(max(float(prob), 0.0), 1.0))
         st.caption(f"Cluster {cluster_num}: {cluster_label}")
 
@@ -290,7 +298,6 @@ with left:
     """, 
     unsafe_allow_html=True)
     
-    plt.style.use('dark_background')
 
     fig, ax = plt.subplots()
 
@@ -315,6 +322,14 @@ with right:
     ax2.set_ylabel("PCA 2")
     ax2.legend(fontsize=8)
     st.pyplot(fig2)
+
+    st.markdown(
+    "<div style='margin-top: 0.5rem; color: #94a3b8;'>"
+    "Customer segmentation highlights distinct groups for targeted marketing and risk-based decision making."
+    "</div>",
+    unsafe_allow_html=True
+    )
+    
     st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown(
@@ -327,5 +342,21 @@ with right:
     show_summary = assets["cluster_summary"].copy()
     st.dataframe(show_summary, use_container_width=True)
     st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown(
+    "<div style='margin-top: 0.5rem; color: #94a3b8; font-size: 0.9rem;'>"
+    "Segmentation reveals distinct customer groups based on income, age, and financial product usage, enabling more targeted marketing and risk assessment strategies."
+    "</div>",
+    unsafe_allow_html=True
+    )
+    
+
+st.subheader("Strategic Recommendations")
+
+st.markdown("""
+- Prioritize high-income customers with existing financial products for loan campaigns  
+- Use segmentation to tailor marketing strategies by customer group  
+- Leverage model predictions to support risk-aware loan approval decisions  
+""")
 
 st.markdown("<p class='small-note'>Built with Streamlit, scikit-learn, pandas, and matplotlib.</p>", unsafe_allow_html=True)
