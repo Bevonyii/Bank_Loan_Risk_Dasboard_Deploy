@@ -187,74 +187,14 @@ input_df = pd.DataFrame([{
     "CreditCard": credit,
 }])
 
-st.markdown("""
-<style>
-.kpi-wrapper {
-    max-width: 1100px;
-    margin: 0 auto 1.25rem auto;
-}
+outer_left, center, outer_right = st.columns([0.4, 5.2, 0.4])
 
-.kpi-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    padding: 18px 20px;
-    min-height: 120px;
-}
-
-.kpi-label {
-    font-size: 0.95rem;
-    color: #cbd5e1;
-    margin-bottom: 8px;
-}
-
-.kpi-value {
-    font-size: 2rem;
-    font-weight: 700;
-    color: white;
-    line-height: 1.1;
-    margin: 0;
-}
-</style>
-""", unsafe_allow_html=True)
-
-st.markdown('<div class="kpi-wrapper">', unsafe_allow_html=True)
-
-k1, k2, k3, k4 = st.columns(4, gap="medium")
-
-with k1:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-label">Customers</div>
-        <p class="kpi-value">{len(model_df):,}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with k2:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-label">Loan Acceptance Rate</div>
-        <p class="kpi-value">{model_df['Personal Loan'].mean()*100:.1f}%</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with k3:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-label">Avg Income</div>
-        <p class="kpi-value">${model_df['Income'].mean():.1f}K</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with k4:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-label">Model Accuracy</div>
-        <p class="kpi-value">{assets['acc']*100:.1f}%</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown('</div>', unsafe_allow_html=True)
+with center:
+    k1, k2, k3, k4 = st.columns(4, gap="medium")
+    k1.metric("Customers", f"{len(model_df):,}")
+    k2.metric("Loan Acceptance Rate", f"{model_df['Personal Loan'].mean()*100:.1f}%")
+    k3.metric("Avg Income", f"${model_df['Income'].mean():.1f}K")
+    k4.metric("Model Accuracy", f"{assets['acc']*100:.1f}%")
 
 st.markdown(
     """
@@ -275,69 +215,6 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 left, right = st.columns([1, 1], gap="large")
 with left:
-    st.subheader("Interactive Prediction")
-
-    if run_pred:
-        pred = assets["clf"].predict(input_df[assets["feature_cols"]])[0]
-        prob = assets["clf"].predict_proba(input_df[assets["feature_cols"]])[0][1]
-        cluster_num, cluster_label = predict_cluster(input_df, assets)
-
-        label_map = {
-            "High-Value Professionals": "High-Value",
-            "Family-Focused Customers": "Family-Focused",
-            "Everyday Banking Customers": "Everyday Banking"
-        }
-        cluster_label = label_map.get(cluster_label, cluster_label)
-
-        outcome = "Likely" if pred == 1 else "Unlikely"
-        
-        color = "#22c55e" if outcome == "Likely" else "#ef4444"
-
-        r1, r2, r3 = st.columns([1, 1, 1], gap="large")
-
-        with r1:
-            st.markdown(f"""
-            <div style="text-align:center;">
-                <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">Loan Outcome</div>
-                <div style="font-size:26px; font-weight:600; color:{color}; white-space: nowrap;">
-                    {outcome}
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-        with r2:
-            st.markdown(f"""
-            <div style="text-align:center;">
-                <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">Loan Probability</div>
-                <div style="font-size:26px; font-weight:600; color:white; white-space: nowrap;">
-                    {prob*100:.1f}%
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-        with r3:
-            st.markdown(f"""
-            <div style="text-align:center;">
-                <div style="font-size:14px; color:#cbd5e1; margin-bottom:6px;">Segment</div>
-                <div style="
-                    font-size:22px;
-                    font-weight:600;
-                    color:white;
-                    line-height:1.2;
-                    word-break: break-word;
-                    overflow-wrap: break-word;
-                ">
-                    {cluster_label}
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-        st.progress(min(max(float(prob), 0.0), 1.0))
-        st.caption(f"Cluster {cluster_num}: {cluster_label}")
-
-        st.info(recommendation(prob, cluster_label))
-    else:
-        st.write("Use the sidebar to enter customer details, then click **Predict Customer Outcome**.")
 
     st.markdown(
     """
